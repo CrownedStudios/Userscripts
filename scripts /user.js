@@ -19,6 +19,7 @@
         return script ? script.version : null;
     }
 
+    alert('Hello World');
     // Function to fetch the latest script from the URL
     async function checkForUpdates() {
         try {
