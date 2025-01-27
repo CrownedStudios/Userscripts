@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Script Update Checker
-// @namespace    https://example.com/
+// @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Automatically checks for script updates by comparing hashes of current and remote script content
 // @author       Your Name
