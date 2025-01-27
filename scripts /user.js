@@ -11,23 +11,32 @@
 // ==/UserScript==
 
 (function() {
-    const scriptUrl = "https://raw.githubusercontent.com/MineverseTutorials/Userscripts/refs/heads/main/scripts%20";
+    const scriptUrl = "https://raw.githubusercontent.com/MineverseTutorials/Userscripts/main/scripts%20/user.js"; 
 
-    // Function to get the current script's version or hash
-    function getCurrentScriptHash() {
+    function getCurrentScriptContent() {
         const script = GM_info.script;
-        return script ? script.version : null;
+        if (script && script.source) {
+            return script.source;
+        } else {
+            console.warn("Unable to get the current script content from GM_info.");
+            return null;
+        }
     }
 
-    alert('Hello World');
-    // Function to fetch the latest script from the URL
     async function checkForUpdates() {
         try {
             const response = await fetch(scriptUrl);
             const latestScriptContent = await response.text();
 
+            const currentScriptContent = getCurrentScriptContent();
+            
+            if (currentScriptContent === null) {
+                console.error("Current script content is unavailable for comparison.");
+                return;
+            }
+
             const latestScriptHash = hashString(latestScriptContent);
-            const currentScriptHash = hashString(GM_info.scriptSource);
+            const currentScriptHash = hashString(currentScriptContent);
 
             if (latestScriptHash !== currentScriptHash) {
                 console.log("Update available!");
@@ -40,8 +49,12 @@
         }
     }
 
-
     function hashString(str) {
+        if (typeof str !== 'string') {
+            console.error("The value passed to hashString is not a string.");
+            return 0;
+        }
+
         let hash = 0, i, chr;
         for (i = 0; i < str.length; i++) {
             chr = str.charCodeAt(i);
