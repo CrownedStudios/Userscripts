@@ -11,7 +11,7 @@
 // ==/UserScript==
 
 (function() {
-    const scriptUrl = "";
+    const scriptUrl = "https://raw.githubusercontent.com/MineverseTutorials/Userscripts/refs/heads/main/scripts%20";
 
     // Function to get the current script's version or hash
     function getCurrentScriptHash() {
